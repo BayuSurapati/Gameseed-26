@@ -9,6 +9,7 @@ public class b_GoalArea : MonoBehaviour
     [Tooltip("Jumlah karakter yang harus masuk ke area untuk win")]
     [SerializeField] private int requiredPlayers = 3;
     [SerializeField] private int dummyCounter = 0;
+    [SerializeField] private b_LevelTimer levelTimer;
 
     //Hash set ini gunanya untuk mengecek berapa player valid yang masuk ke area
     private HashSet<GameObject> playersInGoals = new HashSet<GameObject>();
@@ -28,6 +29,7 @@ public class b_GoalArea : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
+
             playersInGoals.Add(collision.gameObject);
             
             dummyCounter += 1;
@@ -63,7 +65,7 @@ public class b_GoalArea : MonoBehaviour
         Debug.Log("SELAMAT! Semua karakter berhasil mencapai tujuan! GAME CLEAR!");
 
         //Kode Logic
-        Time.timeScale = 0f;
+        b_LevelManager.Instance.LevelCompleted("MENANG");
     }
 
 }
